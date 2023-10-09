@@ -44,12 +44,15 @@
 
     <div class="container">
         <h2>Форма отправки поста</h2>
-        <form id="post-form" action="" method="">
+        <form id="post-form" action="{% url "create_post" %}" method="post">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="category">Категория:</label>
                 <select id="category" name="category" required>
                     <option value="" disabled selected>Выберите категорию</option>
-                        <option value="{{ category.id }}">Названия категории</option>
+                        {% for categ in category %}
+                        <option value="{{ categ.id }}">{{ categ.title }}</option>
+                        {% endfor %}
                 </select>
             </div>
             <div class="form-group">
