@@ -23,3 +23,7 @@ def create_post(request):
         }
     
     return render(request, "create_post.html", context)
+
+
+def homepage(request): 
+    return render(request, "index.html")
