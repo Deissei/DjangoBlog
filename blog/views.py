@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Category, Post
+from .models import Category, Post, SettingWebsite
 
 def create_post(request):
     if request.method == "POST":
@@ -25,5 +25,12 @@ def create_post(request):
     return render(request, "create_post.html", context)
 
 
-def homepage(request): 
-    return render(request, "index.html")
+def homepage(request):
+    posts = Post.objects.all() # Из нашей моделки возьми все объекты
+    
+    try:
+        settings = SettingWebsite.objects.get(id=1)
+    except SettingWebsite.DoesNotExist:
+        return render(request, "index.html", locals())
+    
+    return render(request, "index.html", locals())
