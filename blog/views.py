@@ -26,7 +26,7 @@ def create_post(request):
 
 
 def homepage(request):
-    posts = Post.objects.all() # Из нашей моделки возьми все объекты
+    posts = Post.objects.all()[::-1] # Из нашей моделки возьми все объекты
     
     try:
         settings = SettingWebsite.objects.get(id=1)
@@ -34,3 +34,18 @@ def homepage(request):
         return render(request, "index.html", locals())
     
     return render(request, "index.html", locals())
+
+
+def detail_post(request, post_id):
+    try:
+        settings = SettingWebsite.objects.get(id=1)
+    except SettingWebsite.DoesNotExist:
+        return render(request, "post.html", locals())
+    
+    post = Post.objects.get(id=post_id)
+    
+    categories = Category.objects.all()
+    
+    new_post = Post.objects.all()[::-1][:3]
+    
+    return render(request, "post.html", locals())
