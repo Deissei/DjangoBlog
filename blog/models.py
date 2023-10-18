@@ -11,6 +11,10 @@ class Category(models.Model):
     
     def __str__(self):
         return f"{self.title}"
+    
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
 
 
 class Post(models.Model):
@@ -41,9 +45,10 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title}"
     
-    
     class Meta:
         ordering = ("-created_at", )
+        verbose_name = "Пост"
+        verbose_name_plural = "Посты"
 
 
 class SettingWebsite(models.Model):
@@ -76,3 +81,7 @@ class SettingWebsite(models.Model):
     
     def __str__(self):
         return f"{self.title}"
+
+    class Meta:
+        verbose_name = "Настройка Сайта"
+        verbose_name_plural = "Настройки Сайта"

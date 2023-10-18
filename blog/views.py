@@ -49,3 +49,20 @@ def detail_post(request, post_id):
     new_post = Post.objects.all()[::-1][:3]
     
     return render(request, "post.html", locals())
+
+
+def seacrh(request):
+    if request.method == "GET":
+        query = request.GET["query"]
+        
+        try:
+            settings = SettingWebsite.objects.get(id=1)
+        except SettingWebsite.DoesNotExist:
+            return render(request, "seacrh.html", locals())
+        
+        if query:
+            posts = Post.objects.filter(title__icontains=query)
+
+
+        
+        return render(request, "seacrh.html", locals())
